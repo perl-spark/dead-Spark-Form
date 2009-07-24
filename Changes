@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+        Added preliminary Mx::Clone support
         Migrated build system to Dist::Zilla, so version numbers work now.
 
 0.02    2009-07-21

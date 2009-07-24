@@ -6,6 +6,8 @@ use Moose;
 use MooseX::AttributeHelpers;
 use List::MoreUtils 'all';
 
+with('MooseX::Clone',);
+
 has _fields_a => (
     metaclass => 'Collection::Array',
     isa       => 'ArrayRef',
