@@ -47,7 +47,21 @@ and over in MyApp/Field/Username.pm...
 
 =head1 DEPENDENCIES
 
-Moose. I've dropped using Any::Moose. If you need the performance increase, perhaps it's time to start thinking about shifting off CGI.
+=over 4
+
+=item * Moose
+
+I've dropped using Any::Moose. If you need the performance increase, perhaps it's time to start thinking about shifting off CGI.
+
+=item * MooseX::AttributeHelpers
+
+Makes attribute access way easier and less error prone.
+
+=item * List::MoreUtils
+
+You do have this right?
+
+=back
 
 =cut
 
@@ -59,11 +73,33 @@ use List::MoreUtils 'all';
 
 =cut
 
+=head2 plugin_ns
+
+DOCUMENTME
+
+    attribute: [ optional, readonly, String ]
+
+=cut
+
 has plugin_ns => (
     isa      => 'Str',
     is       => 'ro',
     required => 0,
 );
+
+=head2 printer
+
+See L</_printer>
+
+=cut
+
+=head2 valid
+
+DOCUMENTME
+
+    attribute: [ optional , read/write, Boolean, default => 0 ]
+
+=cut
 
 has valid => (
     isa      => 'Bool',
@@ -75,6 +111,15 @@ has valid => (
 =head1 PRIVATE ATTRIBUTES
 
 No user servicable parts.
+
+=cut
+
+=head2 _fields_a
+
+DOCUMENTME
+
+    attribute: [ optional, read/write, ArrayRef, default =>  [], metaclass => Collection::Array ]
+    provides:  [ push => _add_fields_a , elements => fields_a , clear => _clear_fields_a        ]
 
 =cut
 
@@ -91,6 +136,15 @@ has _fields_a => (
     },
 );
 
+=head2 _fields_h
+
+DOCUMENTME
+
+    attribute: [ optional, read/write, HashRef, default => {}, metaclass => Collection::Hash ]
+    provides:  [ set => _set_fields_h, get => _get_fields_h, delete => _delete_fields_h , exists => _has_fields_h ]
+
+=cut
+
 has _fields_h => (
     metaclass => 'Collection::Hash',
     isa       => 'HashRef',
@@ -105,6 +159,15 @@ has _fields_h => (
     },
 );
 
+=head2 _errors
+
+DOCUMENTME
+
+    attribute: [ optional, readonly, ArrayRef, default => [], metaclass => Collection::Array ]
+    provides:  [ push => _add_error, elements => errors , clear => _clear_errors             ]
+
+=cut
+
 has _errors => (
     metaclass => 'Collection::Array',
     isa       => 'ArrayRef',
@@ -117,12 +180,21 @@ has _errors => (
         clear    => '_clear_errors',
     },);
 
+=head2 _printer
+
+DOCUMENTME
+
+    attribute: [ optional, readonly, Str / Undef , init_arg => printer ]
+=cut
+
 has '_printer' => (
     isa      => 'Maybe[Str]',
     required => 0,
     is       => 'ro',
     init_arg => 'printer',
 );
+
+=cut
 
 =head1 METHODS
 
@@ -134,7 +206,7 @@ has '_printer' => (
 
 Really? this works? what makes it work?  FIXME
 
-=end
+=end author_note
 
 Allows you to set some options for the forms class.
 
@@ -293,6 +365,12 @@ sub BUILD {
     }
 }
 
+=head2 _valid_custom_field
+
+DOCUMENTME
+
+=cut
+
 sub _valid_custom_field {
     my ($self, $thing) = @_;
     eval {
@@ -300,12 +378,24 @@ sub _valid_custom_field {
     } or 0;
 }
 
+=head2 _add_custom_field
+
+DOCUMENTME
+
+=cut
+
 sub _add_custom_field {
     my ($self, $item, %opts) = @_;
 
     #And add it.
     $self->_add($item, $item->name, %opts);
 }
+
+=head2 _add_by_type
+
+DOCUMENTME
+
+=cut
 
 sub _add_by_type {
     my ($self, $type, $name, %opts) = @_;
@@ -317,12 +407,24 @@ sub _add_by_type {
     $self->_add($self->_create_type($type, $name, %opts), $name);
 }
 
+=head2 _error
+
+DOCUMENTME
+
+=cut
+
 sub _error {
     my ($self, $error) = @_;
 
     $self->valid(0);
     $self->_add_error($error);
 }
+
+=head2 _add
+
+DOCUMENTME
+
+=cut
 
 sub _add {
     my ($self, $field, $name) = @_;
@@ -337,6 +439,12 @@ sub _add {
     $self->_set_fields_h($name, $field);
     1;
 }
+
+=head2 _mangle_modname
+
+DOCUMENTME
+
+=cut
 
 sub _mangle_modname {
     my ($self, $mod) = @_;
@@ -361,6 +469,12 @@ sub _mangle_modname {
     $mod;
 }
 
+=head2 _find_matching_mod
+
+DOCUMENTME
+
+=cut
+
 sub _find_matching_mod {
     my ($self, $wanted) = @_;
 
@@ -372,6 +486,12 @@ sub _find_matching_mod {
     #Cannot find
     0;
 }
+
+=head2 _create_type
+
+DOCUMENTME
+
+=cut
 
 sub _create_type {
     my ($self, $type, $name, %opts) = @_;
