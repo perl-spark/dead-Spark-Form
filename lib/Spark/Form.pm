@@ -55,19 +55,6 @@ use Moose;
 use MooseX::AttributeHelpers;
 use List::MoreUtils 'all';
 
-has _fields_a => (
-    metaclass => 'Collection::Array',
-    isa       => 'ArrayRef',
-    is        => 'rw',
-    required  => 0,
-    default   => sub { [] },
-    provides  => {
-        push     => '_add_fields_a',
-        elements => 'fields_a',
-        clear    => '_clear_fields_a',
-    },
-);
-
 =head1 ATTRIBUTES
 
 =cut
@@ -90,6 +77,19 @@ has valid => (
 No user servicable parts.
 
 =cut
+
+has _fields_a => (
+    metaclass => 'Collection::Array',
+    isa       => 'ArrayRef',
+    is        => 'rw',
+    required  => 0,
+    default   => sub { [] },
+    provides  => {
+        push     => '_add_fields_a',
+        elements => 'fields_a',
+        clear    => '_clear_fields_a',
+    },
+);
 
 has _fields_h => (
     metaclass => 'Collection::Hash',
