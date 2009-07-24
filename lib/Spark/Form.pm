@@ -1,6 +1,6 @@
 package Spark::Form;
 
-our $VERSION = 0.2;
+# ABSTRACT: A simple yet powerful forms validation system that promotes reuse.
 
 use Moose;
 use MooseX::AttributeHelpers;
@@ -104,7 +104,7 @@ sub _error {
 sub add {
     my $self = shift;
     my $item = shift;
-    
+
     #Dispatch to the appropriate handler sub
 
     #1. Regular String. Should have a name and any optional args
@@ -239,10 +239,6 @@ sub _create_type {
 1;
 __END__
 
-=head1 NAME
-
-Spark Form - A simple yet powerful forms validation system that promotes reuse.
-
 =head1 SYNOPSIS
 
  use Spark::Form;
@@ -270,7 +266,7 @@ and over in MyApp/Field/Username.pm...
 
  package MyApp::Form::Field::Username;
  use base Spark::Form::Field;
- 
+
  sub validate {
    my ($self,$v) = @_;
 
@@ -349,21 +345,12 @@ L<http://sparkengine.org/docs/forms/>
 
 L<http://github.com/jjl/Spark-Form/>
 
-=head1 AUTHOR
-
-James Laver. L<http://jameslaver.com/>.
+=head1 THANKS
 
 Thanks to the Django Project, whose forms module gave some inspiration.
 
 =head1 SEE ALSO
 
 The FAQ: L<Spark::Form::FAQ>
-
-=head1 LICENSE
-
-Copyright (C) 2009 James Laver
-
-This program is free software; you can redistribute it and/or modify it
-under the same terms as Perl itself.
 
 =cut
