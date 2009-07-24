@@ -4,14 +4,12 @@ with 'Spark::Form::Printer';
 
 use HTML::Tiny;
 
-our $VERSION = '0.01';
-
 sub to_xhtml {
-    shift->_render('to_xhtml',HTML::Tiny->new( mode => 'xml' ),@_);    
+    shift->_render('to_xhtml',HTML::Tiny->new( mode => 'xml' ),@_);
 }
 
 sub to_html {
-    shift->_render('to_html',HTML::Tiny->new( mode => 'html' ),@_);    
+    shift->_render('to_html',HTML::Tiny->new( mode => 'html' ),@_);
 }
 
 sub _render {
