@@ -1,5 +1,7 @@
 package Spark::Form::Field::Role::Validateable;
 
+# ABSTRACT: Fields that can be validated
+
 use Moose::Role;
 use MooseX::AttributeHelpers;
 
@@ -43,20 +45,16 @@ before 'validate' => sub {
 1;
 __END__
 
-=head1 NAME
-
-Spark::Form::Field::Role::Validateable - Fields that can be validated.
-
 =head1 SYNOPSIS
 
  package MyApp::Field::CustomText;
  use Moose;
  extends 'Spark::Form::Field';
  with 'Spark::Form::Field::Role::Validateable';
- 
+
  sub validate {
      my $self = shift;
-     
+
      if ($self->value eq 'password') {
          $self->valid(1);
          return 1;
@@ -65,7 +63,7 @@ Spark::Form::Field::Role::Validateable - Fields that can be validated.
          return 0;
      }
  }
- 
+
 =head1 ACCESSORS
 
 =head2 valid => Bool

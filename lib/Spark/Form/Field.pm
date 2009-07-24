@@ -1,5 +1,7 @@
 package Spark::Form::Field;
 
+# ABSTRACT: Superclass for all Form Fields
+
 use Moose;
 
 has name  => (
@@ -40,17 +42,17 @@ Field superclass. Must subclass this to be considered a field.
  extends 'Spark::Form::Field';
  with 'Spark::Form::Field::Role::Validateable';
  with 'Spark::Form::Field::Role::Printable::XHTML';
- 
+
  sub validate {
      #validate existence of data
      !!shift->value;
  }
- 
+
  sub to_xhtml {
      #Rather poorly construct an XHTML tag
      '<input type="checkbox" value="' . shift-value . '">';
  }
- 
+
 Note that you might want to look into HTML::Tiny.
 Or better still, L<SparkX::Form::Field::Plugin::StarML>.
 
