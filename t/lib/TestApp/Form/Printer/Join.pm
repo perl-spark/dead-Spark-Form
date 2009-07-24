@@ -5,21 +5,21 @@ with 'Spark::Form::Printer';
 use HTML::Tiny;
 
 sub to_xhtml {
-    shift->_render('to_xhtml',HTML::Tiny->new( mode => 'xml' ),@_);
+    shift->_render('to_xhtml', HTML::Tiny->new(mode => 'xml'), @_);
 }
 
 sub to_html {
-    shift->_render('to_html',HTML::Tiny->new( mode => 'html' ),@_);
+    shift->_render('to_html', HTML::Tiny->new(mode => 'html'), @_);
 }
 
 sub _render {
     my ($self, $func, $html, @params) = @_;
 
-    join(' ', $self->_get_items($func,$html));
+    join(' ', $self->_get_items($func, $html));
 }
 
 sub _get_items {
-    my ($self,$func,$html) = @_;
+    my ($self, $func, $html) = @_;
 
     map {
         $_->$func();

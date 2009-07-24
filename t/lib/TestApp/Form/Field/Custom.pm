@@ -5,8 +5,8 @@ extends 'Spark::Form::Field';
 with 'Spark::Form::Field::Role::Validateable';
 
 has 'min_length' => (
-    isa => 'Int',
-    is => 'rw',
+    isa      => 'Int',
+    is       => 'rw',
     required => 0,
     default  => 6,
 );

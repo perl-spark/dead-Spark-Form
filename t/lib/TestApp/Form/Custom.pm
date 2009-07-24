@@ -16,9 +16,9 @@ sub BUILD {
         form => $self
     );
     my $pass2 = TestApp::Form::Field::Password->new(
-        name => 'confirm_password',
-        confirm=>'password',
-        form => $self
+        name    => 'confirm_password',
+        confirm => 'password',
+        form    => $self
     );
 
     $self->add($email)->add($pass1)->add($pass2);

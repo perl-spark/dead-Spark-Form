@@ -4,7 +4,7 @@ package Spark::Form::Field;
 
 use Moose;
 
-has name  => (
+has name => (
     isa      => 'Str',
     is       => 'ro',
     required => 1,
