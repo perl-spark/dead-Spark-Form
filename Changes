@@ -1,6 +1,11 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+        Migrated build system to Dist::Zilla, so version numbers work now.
+
+0.02    2009-07-21
+        Added testing deps
+        Auto-requires printer modules for you ( and fixes related bug )
 
 0.1    2009-05-31
         First version, released on an unsuspecting world.
