@@ -108,6 +108,8 @@ has valid => (
     default  => 0,
 );
 
+=begin private
+
 =head1 PRIVATE ATTRIBUTES
 
 No user servicable parts.
@@ -193,6 +195,8 @@ has '_printer' => (
     is       => 'ro',
     init_arg => 'printer',
 );
+
+=end private
 
 =cut
 
@@ -319,6 +323,8 @@ sub data {
 
     $self;
 }
+
+=begin private
 
 =head1 PRIVATE METHODS
 
@@ -499,6 +505,10 @@ sub _create_type {
     eval qq{ use $mod; 1 } or die("Could not load $mod, $@");
     $mod->new(name => $name, form => $self, %opts);
 }
+
+=end private
+
+=cut
 
 1;
 __END__
